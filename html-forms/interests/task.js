@@ -1,18 +1,18 @@
-const interestCheck = [...document.querySelectorAll(".interest__check")]
+const interestMenu = document.querySelectorAll('.interest__check');
 
-for (let item of interestCheck) {
-   interestCheck.checked = false;
-}
+for (let elementMenu of interestMenu) {
+   elementMenu.addEventListener('change', () => {
+      const subElementMenu = elementMenu.closest('.interest').querySelectorAll('.interest__check');
 
-interestCheck.forEach((check) => check.addEventListener("change", checkAllChekboxes));
+      if (elementMenu.checked && elementMenu.closest('ul.interests_active') == null) {
+         for (let subMenu of subElementMenu) {
+            subMenu.checked = true;
+         }
 
-function checkAllChekboxes(event) {
-   const parent = event.target.closest(".interest");
-   const children = [...parent.querySelectorAll(".interest__check")];
-
-   console.log(event.target.parentElement.textContent.trim())
-
-   for (let child of children) {
-      child.checked = this.checked;
-   }
+      } else if (!elementMenu.checked && elementMenu.closest('ul.interests_active') == null) {
+         for (let subMenu of subElementMenu) {
+            subMenu.checked = false;
+         }
+      }
+   })
 }
