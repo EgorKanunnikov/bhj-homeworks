@@ -1,21 +1,24 @@
-let active = document.getElementById("modal_main");
-active.className += " modal_active";
+const openModal = document.querySelectorAll('div.modal');
+const closeModal = document.querySelectorAll('div.modal__close')
+const modal = document.getElementById('modal_main');
+const objModalSuccess = document.getElementsByClassName('show-success')
+const modalSuccess = document.getElementById('modal_success');
 
-let closeBth = document.getElementsByClassName("modal__close");
+for (let i = 0; i < closeModal.length; i++) {
+   closeModal[i].addEventListener("click", handleOpenModal);
+}
 
-let bthSuccess = document.querySelector(".show-success");
-console.log(bthSuccess)
-bthSuccess.addEventListener("click", () => {
-   document.getElementById("modal_success").className += " modal_active";
+objModalSuccess[0].addEventListener("click", handleModalSuccess);
 
-})
-
-for (let item of closeBth) {
-   item.onclick = () => {
-      if (item.parentElement.parentElement.classList.contains("modal_active") && item.classList.contains("modal__close_times")) {
-         item.parentElement.parentElement.classList.remove("modal_active");
-         active.classList.remove("modal_active");
-      }
-
+function handleOpenModal() {
+   for (let i = 0; i < openModal.length; i++) {
+      openModal[i].classList.remove('modal_active');
    }
-} 
+}
+
+function handleModalSuccess() {
+   modalSuccess.classList.add('modal_active');
+   modal.classList.remove('modal_active');
+}
+
+modal.classList.add('modal_active');
